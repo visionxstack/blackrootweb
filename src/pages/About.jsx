@@ -11,7 +11,6 @@ export default function About() {
         focus: 'Strategic Leadership & Security Engineer',
         description: 'Sets BlackRoot’s direction and leads security engagements, pairing strategic leadership with hands-on offensive security work.',
         photo: '/team/vision-kc.png',
-        aboutUrl: '/about/vision',
         initials: 'VK',
         imagePosition: 'center 85%',
         barColor: '#570abc',
@@ -24,7 +23,6 @@ export default function About() {
         focus: 'Technology Leadership & AI Engineering',
         description: 'Owns the technical vision, architecting the AI agents and intelligent systems that power what BlackRoot ships for its clients.',
         photo: '/team/safal-lohani.png',
-        aboutUrl: '/about/safal',
         initials: 'SL',
         imagePosition: 'center center',
         barColor: '#0891b2',
@@ -37,7 +35,6 @@ export default function About() {
         focus: 'Head of Cybersecurity Operations',
         description: 'Leads BlackRoot’s VAPT and security research, directing offensive security assessments and the development of capabilities across engagements.',
         photo: '/team/aawart-kc.png',
-        aboutUrl: '/about/aawart',
         initials: 'AK',
         imagePosition: 'center center',
         barColor: '#059669',
@@ -50,7 +47,6 @@ export default function About() {
         focus: 'Operations Management & AI Researcher',
         description: 'Runs operations and applied AI research, turning security ideas into reliable delivery for every engagement.',
         photo: '/team/pratyush-poudel.png',
-        aboutUrl: '/about/pratyush',
         initials: 'PP',
         imagePosition: 'center 20%',
         barColor: '#d97706',
@@ -78,7 +74,6 @@ export default function About() {
         const roleEl = document.getElementById('teamShowcaseRole');
         const focusEl = document.getElementById('teamShowcaseFocus');
         const bioEl = document.getElementById('teamShowcaseBio');
-        const aboutLinkEl = document.getElementById('showcaseAbout');
 
         if (member.photo) {
           imgEl.src = member.photo;
@@ -106,7 +101,6 @@ export default function About() {
         }
         if (focusEl) focusEl.innerText = member.focus;
         if (bioEl) bioEl.innerText = member.description;
-        if (aboutLinkEl) aboutLinkEl.href = member.aboutUrl || '#';
 
         const pillBtns = document.querySelectorAll('.team-pill-btn');
         pillBtns.forEach((btn, i) => {
@@ -247,7 +241,7 @@ export default function About() {
           <div className="focus-pills">
             <div className="focus-item">
               <div className="focus-icon">
-                <img src="public/security-research.png" alt="Applied Security Research Icon" />
+                <img src="/security-research.png" alt="Applied Security Research Icon" />
               </div>
               <div className="focus-info">
                 <h4>Applied Security Research</h4>
@@ -257,7 +251,7 @@ export default function About() {
 
             <div className="focus-item">
               <div className="focus-icon">
-                <img src="public/offensive-security.png" alt="Offensive Security Icon" />
+                <img src="/offensive-security.png" alt="Offensive Security Icon" />
               </div>
               <div className="focus-info">
                 <h4>Offensive Security</h4>
@@ -267,7 +261,7 @@ export default function About() {
 
             <div className="focus-item">
               <div className="focus-icon">
-                <img src="public/intelligent-engineering.png" alt="Intelligent Engineering Icon" />
+                <img src="/intelligent-engineering.png" alt="Intelligent Engineering Icon" />
               </div>
               <div className="focus-info">
                 <h4>Intelligent Engineering</h4>
@@ -348,10 +342,6 @@ export default function About() {
             <div className="team-member-role" id="teamShowcaseRole">Chief Executive Officer</div>
             <div className="team-member-focus" id="teamShowcaseFocus">Strategic Leadership & Security Engineer</div>
             <p className="team-member-bio" id="teamShowcaseBio">Sets BlackRoot’s direction and leads security engagements, pairing strategic leadership with hands-on offensive security work.</p>
-            <a className="team-linkedin-link" id="showcaseAbout" href="/about/vision">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
-              <span>About</span>
-            </a>
           </div>
         </div>
 
@@ -403,19 +393,19 @@ export default function About() {
     <div className="wrap">
       <div className="metrics-bar" id="metricsBar">
         <div className="metric-card">
-          <div className="metric-value"><span className="counter" data-target="400">0</span><span className="symbol">+</span></div>
+          <div className="metric-value text-gradient-red-black"><span className="counter" data-target="400">0</span><span className="symbol">+</span></div>
           <div className="metric-label">Vulnerabilities Identified</div>
         </div>
         <div className="metric-card">
-          <div className="metric-value"><span className="counter" data-target="100">0</span><span className="symbol">%</span></div>
+          <div className="metric-value text-gradient-blue-black"><span className="counter" data-target="100">0</span><span className="symbol">%</span></div>
           <div className="metric-label">Applied Research Focus</div>
         </div>
         <div className="metric-card">
-          <div className="metric-value"><span className="purple-text">AI</span><span>×</span><span>SEC</span></div>
+          <div className="metric-value text-gradient-black-purple"><span className="purple-text">AI</span><span>×</span><span>SEC</span></div>
           <div className="metric-label">Engineered Security Systems</div>
         </div>
         <div className="metric-card">
-          <div className="metric-value"><span className="counter" data-target="100">0</span><span className="symbol">%</span> <span style={{fontSize: '22px', marginLeft: '4px'}}>Zero-Day</span></div>
+          <div className="metric-value text-gradient-green-black"><span className="counter" data-target="100">0</span><span className="symbol">%</span> <span style={{fontSize: '22px', marginLeft: '4px'}}>Zero-Day</span></div>
           <div className="metric-label">Resilient Infrastructure</div>
         </div>
       </div>
