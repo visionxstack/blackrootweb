@@ -6,7 +6,7 @@ export default function ScrollToHash() {
 
   useEffect(() => {
     if (hash) {
-      // Small timeout to ensure the page has rendered before scrolling
+      
       setTimeout(() => {
         const id = hash.replace('#', '');
         const element = document.getElementById(id);

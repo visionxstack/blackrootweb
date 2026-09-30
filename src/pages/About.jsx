@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom';
+import SEO from '../components/SEO';
 import React, { useEffect, useRef, useState } from "react";
 
 export default function About() {
@@ -180,32 +182,15 @@ export default function About() {
 
   return (
     <main>
+      <SEO 
+        title="About BlackRoot Technologies | Security Engineering"
+        description="BlackRoot Technologies is a security-first engineering and research company. We use offensive security, applied research, and intelligent systems to strengthen modern technology."
+        url="/about"
+      />
 
 
 {/*  Mobile Navigation Drawer  */}
-<div className="mobile-drawer" id="mobileDrawer">
-  <div className="mobile-drawer-header">
-    <a className="brand" href="index.html">
-      <img className="brand-mark" src="logo/blackroot-logo.png" alt="BlackRoot Logo" />
-      <div className="brand-text">
-        <span className="brand-name">BLACKROOT</span>
-        <span className="brand-sub">TECHNOLOGIES</span>
-      </div>
-    </a>
-    <button className="mobile-toggle" id="closeDrawerBtn" aria-label="Close Menu">
-      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-    </button>
-  </div>
-  <div className="mobile-nav">
-    <a href="about.html" className="mobile-link">About</a>
-    <a href="services.html" className="mobile-link">Services</a>
-    <a href="index.html#methodology" className="mobile-link">Methodology</a>
-    <a href="index.html#contact" className="mobile-link">Contact</a>
-  </div>
-  <div>
-    <button className="btn btn-primary open-modal-btn" style={{width: '100%'}}>Start a Conversation →</button>
-  </div>
-</div>
+
 
 <main>
   {/*  Page Hero  */}
@@ -397,7 +382,7 @@ export default function About() {
           <div className="metric-label">Vulnerabilities Identified</div>
         </div>
         <div className="metric-card">
-          <div className="metric-value text-gradient-blue-black"><span className="counter" data-target="100">0</span><span className="symbol">%</span></div>
+          <div className="metric-value text-gradient-blue-black"><span className="purple-text">Applied</span></div>
           <div className="metric-label">Applied Research Focus</div>
         </div>
         <div className="metric-card">
@@ -405,8 +390,8 @@ export default function About() {
           <div className="metric-label">Engineered Security Systems</div>
         </div>
         <div className="metric-card">
-          <div className="metric-value text-gradient-green-black"><span className="counter" data-target="100">0</span><span className="symbol">%</span> <span style={{fontSize: '22px', marginLeft: '4px'}}>Zero-Day</span></div>
-          <div className="metric-label">Resilient Infrastructure</div>
+          <div className="metric-value text-gradient-green-black"><span className="purple-text">Continuous</span></div>
+          <div className="metric-label">Security Engineering</div>
         </div>
       </div>
     </div>
@@ -414,34 +399,7 @@ export default function About() {
 </main>
 
 {/*  Modal Dialog  */}
-<div className="modal-backdrop" id="inquiryModal">
-  <div className="modal-box">
-    <button className="modal-close" id="closeModalBtn" aria-label="Close modal">
-      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-    </button>
-    <div style={{marginBottom: '24px'}}>
-      <span className="section-tag">Direct Inquiry</span>
-      <h3 style={{fontFamily: 'var(--font-display)', fontSize: '24px', fontWeight: '800', margin: '6px 0 10px'}}>Start a Conversation</h3>
-      <p style={{fontSize: '14.5px', color: 'var(--muted)', margin: '0'}}>
-        Have a project in mind? Tell us what you're working on, what you're trying to secure, or what you're trying to build.
-      </p>
-    </div>
 
-    <form id="modalForm" onSubmit={(e) => e.preventDefault()}>
-      <div className="form-group">
-        <label className="form-label" htmlFor="modalEmail">Your Email</label>
-        <input className="form-input" type="email" id="modalEmail" placeholder="your@email.com" required />
-      </div>
-      <div className="form-group">
-        <label className="form-label" htmlFor="modalMessage">Project Details</label>
-        <textarea className="form-textarea" id="modalMessage" placeholder="Describe your operational or security goals..." required></textarea>
-      </div>
-      <button className="btn btn-primary" style={{width: '100%'}} type="submit">
-        <span>Send Inquiry →</span>
-      </button>
-    </form>
-  </div>
-</div>
 
 {/*  Site Footer  */}
 

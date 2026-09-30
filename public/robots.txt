@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+
+# Block crawling of any private or irrelevant directories if they existed
+Disallow: /*?*
+
+# Specify sitemap
+Sitemap: https://blackroot.com.np/sitemap.xml
