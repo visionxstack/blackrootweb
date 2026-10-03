@@ -21,6 +21,7 @@ export default function Header() {
           <nav className="main-nav" aria-label="Main Navigation">
             <Link className="nav-link" to="/about">About</Link>
             <Link className="nav-link" to="/services">Services</Link>
+            <Link className="nav-link" to="/agentic-ai">AI Research</Link>
             <Link className="nav-link" to="/#methodology">Methodology</Link>
             <button className="nav-link" onClick={() => setIsModalOpen(true)} style={{background: 'none', border: 'none'}}>Contact</button>
           </nav>
@@ -50,6 +51,7 @@ export default function Header() {
         <nav className="mobile-nav">
           <Link to="/about" onClick={() => setIsMobileOpen(false)}>About Us</Link>
           <Link to="/services" onClick={() => setIsMobileOpen(false)}>Services</Link>
+          <Link to="/agentic-ai" onClick={() => setIsMobileOpen(false)}>AI Research</Link>
           <Link to="/#methodology" onClick={() => setIsMobileOpen(false)}>Methodology</Link>
           <button onClick={() => {setIsMobileOpen(false); setIsModalOpen(true);}} style={{background:'none', border:'none', textAlign:'left', padding:0, fontFamily:'var(--font-display)', fontSize:'24px', fontWeight:'700', color:'var(--ink)'}}>Contact</button>
         </nav>

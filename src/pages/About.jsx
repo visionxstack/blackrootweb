@@ -16,7 +16,8 @@ export default function About() {
         initials: 'VK',
         imagePosition: 'center 85%',
         barColor: '#570abc',
-        roleColor: '#570abc'
+        roleColor: '#570abc',
+        linkedin: 'https://linkedin.com/in/visionkc'
       },
       {
         name: 'Safal Lohani',
@@ -28,7 +29,8 @@ export default function About() {
         initials: 'SL',
         imagePosition: 'center center',
         barColor: '#0891b2',
-        roleColor: '#0891b2'
+        roleColor: '#0891b2',
+        linkedin: 'https://linkedin.com/in/safallohani'
       },
       {
         name: 'Aawart KC',
@@ -40,7 +42,8 @@ export default function About() {
         initials: 'AK',
         imagePosition: 'center center',
         barColor: '#059669',
-        roleColor: '#059669'
+        roleColor: '#059669',
+        linkedin: 'https://linkedin.com/in/aawartkc'
       },
       {
         name: 'Pratyush Poudel',
@@ -52,7 +55,8 @@ export default function About() {
         initials: 'PP',
         imagePosition: 'center 20%',
         barColor: '#d97706',
-        roleColor: '#d97706'
+        roleColor: '#d97706',
+        linkedin: 'https://linkedin.com/in/pratyushpoudel'
       }
     ];
 
@@ -76,6 +80,7 @@ export default function About() {
         const roleEl = document.getElementById('teamShowcaseRole');
         const focusEl = document.getElementById('teamShowcaseFocus');
         const bioEl = document.getElementById('teamShowcaseBio');
+        const linkedinEl = document.getElementById('teamShowcaseLinkedin');
 
         if (member.photo) {
           imgEl.src = member.photo;
@@ -103,6 +108,14 @@ export default function About() {
         }
         if (focusEl) focusEl.innerText = member.focus;
         if (bioEl) bioEl.innerText = member.description;
+        if (linkedinEl) {
+          if (member.linkedin) {
+            linkedinEl.href = member.linkedin;
+            linkedinEl.style.display = 'inline-flex';
+          } else {
+            linkedinEl.style.display = 'none';
+          }
+        }
 
         const pillBtns = document.querySelectorAll('.team-pill-btn');
         pillBtns.forEach((btn, i) => {
@@ -327,6 +340,10 @@ export default function About() {
             <div className="team-member-role" id="teamShowcaseRole">Chief Executive Officer</div>
             <div className="team-member-focus" id="teamShowcaseFocus">Strategic Leadership & Security Engineer</div>
             <p className="team-member-bio" id="teamShowcaseBio">Sets BlackRoot’s direction and leads security engagements, pairing strategic leadership with hands-on offensive security work.</p>
+            <a className="team-linkedin-link" id="teamShowcaseLinkedin" href="https://linkedin.com/in/visionkc" target="_blank" rel="noopener noreferrer">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"/></svg>
+              <span>LinkedIn</span>
+            </a>
           </div>
         </div>
 
@@ -378,19 +395,19 @@ export default function About() {
     <div className="wrap">
       <div className="metrics-bar" id="metricsBar">
         <div className="metric-card">
-          <div className="metric-value text-gradient-red-black"><span className="counter" data-target="400">0</span><span className="symbol">+</span></div>
+          <div className="metric-value"><span className="counter" data-target="400">0</span><span>+</span></div>
           <div className="metric-label">Vulnerabilities Identified</div>
         </div>
         <div className="metric-card">
-          <div className="metric-value text-gradient-blue-black"><span className="purple-text">Applied</span></div>
+          <div className="metric-value"><span>Applied</span></div>
           <div className="metric-label">Applied Research Focus</div>
         </div>
         <div className="metric-card">
-          <div className="metric-value text-gradient-black-purple"><span className="purple-text">AI</span><span>×</span><span>SEC</span></div>
+          <div className="metric-value"><span>AI</span><span>×</span><span>SEC</span></div>
           <div className="metric-label">Engineered Security Systems</div>
         </div>
         <div className="metric-card">
-          <div className="metric-value text-gradient-green-black"><span className="purple-text">Continuous</span></div>
+          <div className="metric-value"><span>Continuous</span></div>
           <div className="metric-label">Security Engineering</div>
         </div>
       </div>

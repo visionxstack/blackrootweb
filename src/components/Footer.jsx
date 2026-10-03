@@ -36,6 +36,7 @@ export default function Footer() {
           <div className="footer-links">
             <Link to="/about">About Us</Link>
             <Link to="/services">Services</Link>
+            <Link to="/agentic-ai">Agentic AI Security</Link>
             <Link to="/#methodology">Methodology</Link>
             <Link to="/#contact">Contact</Link>
           </div>
@@ -45,6 +46,7 @@ export default function Footer() {
           <div className="footer-col-title">Services</div>
           <div className="footer-links">
             <Link to="/services#pentesting">Penetration Testing</Link>
+            <Link to="/agentic-ai">Agentic Security System</Link>
             <Link to="/services#ai-systems">AI & Intelligent Systems</Link>
             <Link to="/services#security-engineering">Security Engineering</Link>
           </div>

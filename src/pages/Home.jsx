@@ -1,9 +1,11 @@
 import { Link } from 'react-router-dom';
 import SEO from '../components/SEO';
 import React, { useEffect, useRef, useState } from "react";
+import InquiryModal from '../components/InquiryModal';
 
 export default function Home() {
   const [dots, setDots] = useState([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const randomizeDots = () => {
     const colors = ['#10b981', '#ef4444', '#eab308'];
@@ -86,6 +88,34 @@ export default function Home() {
     }
   }, []);
 
+  const handleContactSubmit = async (e) => {
+    e.preventDefault();
+    const name = document.getElementById('contactName').value;
+    const email = document.getElementById('contactEmail').value;
+    const category = document.getElementById('contactCategory').value;
+    const message = document.getElementById('contactMessage').value;
+    const btn = e.target.querySelector('button[type="submit"] span');
+    const originalText = btn.innerText;
+
+    btn.innerText = "Sending...";
+    try {
+      await fetch(import.meta.env.VITE_FORMSPREE_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({ name, email, category, message })
+      });
+      btn.innerText = "Sent Successfully!";
+      e.target.reset();
+      setTimeout(() => btn.innerText = originalText, 3000);
+    } catch (err) {
+      btn.innerText = "Error Sending!";
+      setTimeout(() => btn.innerText = originalText, 3000);
+    }
+  };
+
   return (
     <main>
       <SEO 
@@ -110,7 +140,7 @@ export default function Home() {
   {/*  Hero Section  */}
   <section className="hero">
     <div className="wrap hero-inner">
-      <div className="hero-copy">
+      <div className="hero-copy reveal-3d">
         <div className="eyebrow">
           <span className="eyebrow-badge">Cybersecurity & Intelligent Engineering</span>
           <div className="eyebrow-line"></div>
@@ -125,16 +155,16 @@ export default function Home() {
         </p>
 
         <div className="hero-actions">
-          <button className="btn btn-primary open-modal-btn" type="button">
+          <button className="btn btn-primary open-modal-btn" type="button" onClick={() => setIsModalOpen(true)}>
             <span>Start a Conversation</span>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
           </button>
-          <a className="btn btn-secondary" href="#services">Explore Services</a>
+          <Link className="btn btn-secondary" to="/services">Explore Services</Link>
         </div>
       </div>
 
       {/*  Hero Graphic  */}
-      <div className="hero-graphic">
+      <div className="hero-graphic reveal-up reveal-delay-2">
         <div className="radar-container" onMouseEnter={randomizeDots}>
           <svg viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg">
             <circle cx="250" cy="250" r="230" stroke="#e3e4e6" strokeWidth="1.5" strokeDasharray="4 4"/>
@@ -245,7 +275,7 @@ export default function Home() {
   <section className="about-section section-padding" id="about">
     <div className="wrap">
       <div className="about-grid">
-        <div className="about-content">
+        <div className="about-content reveal-3d">
           <span className="section-tag">About BlackRoot</span>
           <h3>Built for the problems others overlook.</h3>
           <div className="about-paragraphs">
@@ -261,7 +291,7 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="focus-pills-container">
+        <div className="focus-pills-container reveal-up reveal-delay-2">
           <div className="focus-pills-title">Core Disciplines & Focus</div>
           <div className="focus-pills">
             <div className="focus-item">
@@ -298,167 +328,76 @@ export default function Home() {
       </div>
 
       {/*  Metrics Bar with Animated Counters  */}
-      <div className="metrics-bar" id="metricsBar">
+      <div className="metrics-bar reveal-3d" id="metricsBar">
         <div className="metric-card">
-          <div className="metric-value text-gradient-red-black"><span className="counter" data-target="400">0</span><span className="symbol">+</span></div>
+          <div className="metric-value"><span className="counter" data-target="400">0</span><span>+</span></div>
           <div className="metric-label">Vulnerabilities Identified</div>
         </div>
         <div className="metric-card">
-          <div className="metric-value text-gradient-blue-black"><span className="purple-text">Applied</span></div>
+          <div className="metric-value"><span>Applied</span></div>
           <div className="metric-label">Applied Research Focus</div>
         </div>
         <div className="metric-card">
-          <div className="metric-value text-gradient-black-purple"><span className="purple-text">AI</span><span>×</span><span>SEC</span></div>
+          <div className="metric-value"><span>AI</span><span>×</span><span>SEC</span></div>
           <div className="metric-label">Engineered Security Systems</div>
         </div>
         <div className="metric-card">
-          <div className="metric-value text-gradient-green-black"><span className="purple-text">Continuous</span></div>
+          <div className="metric-value"><span>Continuous</span></div>
           <div className="metric-label">Security Engineering</div>
         </div>
       </div>
     </div>
   </section>
 
-  {/*  Services Section  */}
-  <section className="services-section section-padding" id="services">
+  {/* Agentic AI Introduction Section */}
+  <section className="section-padding agentic-intro-section" style={{ background: "var(--bg-soft)", borderBottom: "1px solid var(--line)" }}>
     <div className="wrap">
-      <div className="section-header">
-        <span className="section-tag">Capabilities & Practice Areas</span>
-        <h2 className="section-title">Services</h2>
-        <p className="section-subtitle">
-          From offensive security assessments to custom AI systems, we help organizations identify vulnerabilities, build stronger security foundations, and engineer resilient technologies.
-        </p>
-      </div>
-
-      <div className="services-grid">
-        {/*  Service 1: Security Research & Penetration Testing  */}
-        <div className="service-card">
-          <div className="service-top">
-            <span className="service-badge">Pillar I</span>
-            <h3 className="service-card-title">Security Research & Penetration Testing</h3>
-            <p className="service-card-desc">
-              We assess applications, infrastructure, APIs, and systems to identify vulnerabilities before they become real-world security incidents.
-            </p>
-
-            <div className="service-sublist-title">Core Services</div>
-            <div className="service-sublist">
-              <div className="service-subitem">
-                <img src="/services-icons/web-app-sec.png" alt="Web Application Security" className="subservice-icon" />
-                <span>Web Application Security</span>
-              </div>
-              <div className="service-subitem">
-                <img src="/services-icons/api-sec.png" alt="API Security" className="subservice-icon" />
-                <span>API Security</span>
-              </div>
-              <div className="service-subitem">
-                <img src="/services-icons/infrastructure-sec.png" alt="Infrastructure & Network Security" className="subservice-icon" />
-                <span>Infrastructure & Network Security</span>
-              </div>
-              <div className="service-subitem">
-                <img src="/services-icons/vulnerability.png" alt="Vulnerability Research" className="subservice-icon" />
-                <span>Vulnerability Research</span>
-              </div>
-              <div className="service-subitem">
-                <img src="/services-icons/offensive.png" alt="Offensive Security Assessments" className="subservice-icon" />
-                <span>Offensive Security Assessments</span>
-              </div>
-              <div className="service-subitem">
-                <img src="/services-icons/testing-validation.png" alt="Security Testing & Validation" className="subservice-icon" />
-                <span>Security Testing & Validation</span>
-              </div>
-              <div className="service-subitem">
-                <img src="/services-icons/security-reviews.png" alt="Security Reviews" className="subservice-icon" />
-                <span>Security Reviews</span>
-              </div>
-            </div>
-          </div>
+      <div style={{ display: 'flex', flexWrap: 'wrap', alignItems: 'center', gap: '60px' }}>
+        <div style={{ flex: '1', minWidth: '320px' }} className="reveal-3d">
+          <span className="section-tag">AI-POWERED AUTONOMY</span>
+          <h2 className="section-title" style={{ fontSize: "36px", marginBottom: "20px" }}>Security Research, Engineered to Investigate.</h2>
+          <p className="section-subtitle" style={{ marginBottom: "32px" }}>
+            Our proprietary agentic AI system autonomously explores attack surfaces, forms security hypotheses, executes controlled tests, correlates evidence, and validates findings before reporting them.
+          </p>
+          <ul className="agentic-intro-list" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px', marginBottom: '40px', listStyle: 'none', padding: 0 }}>
+            {['Autonomous Recon', 'Security Reasoning', 'Multi-Agent Testing', 'Evidence Correlation', 'Automated Validation'].map(cap => (
+              <li key={cap} style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '14.5px', fontWeight: '600', color: 'var(--ink)' }}>
+                <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: 'var(--purple)' }}></span>
+                {cap}
+              </li>
+            ))}
+          </ul>
+          <Link to="/agentic-ai" className="btn btn-primary" style={{ display: 'inline-flex' }}>
+            <span>Explore Our Agentic AI</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ marginLeft: "8px", width: "16px", height: "16px" }}><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </Link>
         </div>
-
-        {/*  Service 2: AI & Intelligent Systems  */}
-        <div className="service-card">
-          <div className="service-top">
-            <span className="service-badge">Pillar II</span>
-            <h3 className="service-card-title">AI & Intelligent Systems</h3>
-            <p className="service-card-desc">
-              We build practical AI-powered systems designed around real operational and technical requirements.
-            </p>
-
-            <div className="service-sublist-title">Core Services</div>
-            <div className="service-sublist">
-              <div className="service-subitem">
-                <img src="/services-icons/custom-ai.png" alt="Custom AI Agents" className="subservice-icon" />
-                <span>Custom AI Agents</span>
+        
+        <div style={{ flex: '1', minWidth: '320px', display: 'flex', justifyContent: 'center' }} className="reveal-up reveal-delay-2">
+           <div style={{ background: 'var(--card-bg)', padding: '32px', borderRadius: 'var(--radius-md)', border: '1px solid var(--line)', boxShadow: 'var(--shadow-md)', width: '100%', maxWidth: '400px' }}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                 {['RECON', 'ANALYZE', 'TEST', 'VALIDATE', 'REPORT'].map((step, i) => (
+                    <div key={step} style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                       <div style={{ padding: '8px 16px', background: 'var(--bg-soft)', borderRadius: '6px', fontSize: '12px', fontWeight: '800', letterSpacing: '0.1em', border: '1px solid var(--line-soft)', width: '120px', textAlign: 'center', color: 'var(--ink)' }} className={`home-agent-step home-step-${i}`}>
+                          {step}
+                       </div>
+                       {i < 4 && <div style={{ height: '16px', width: '2px', background: 'var(--line)', margin: '4px 0' }}></div>}
+                    </div>
+                 ))}
               </div>
-              <div className="service-subitem">
-                <img src="/services-icons/ai-sec-solution.png" alt="AI-Powered Security Solutions" className="subservice-icon" />
-                <span>AI-Powered Security Solutions</span>
-              </div>
-              <div className="service-subitem">
-                <img src="/services-icons/rag.png" alt="RAG" className="subservice-icon" />
-                <span>Retrieval-Augmented Generation (RAG)</span>
-              </div>
-              <div className="service-subitem">
-                <img src="/services-icons/int-automation.png" alt="Intelligent Automation" className="subservice-icon" />
-                <span>Intelligent Automation</span>
-              </div>
-              <div className="service-subitem">
-                <img src="/services-icons/sec-focus-ai.png" alt="Security-focused AI Research" className="subservice-icon" />
-                <span>Security-focused AI Research</span>
-              </div>
-              <div className="service-subitem">
-                <img src="/services-icons/custom-software.png" alt="Custom AI & Software Systems" className="subservice-icon" />
-                <span>Custom AI & Software Systems</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        {/*  Service 3: Security Engineering  */}
-        <div className="service-card">
-          <div className="service-top">
-            <span className="service-badge">Pillar III</span>
-            <h3 className="service-card-title">Security Engineering</h3>
-            <p className="service-card-desc">
-              Beyond identifying vulnerabilities, we help organizations build stronger security foundations.
-            </p>
-
-            <div className="service-sublist-title">Core Services</div>
-            <div className="service-sublist">
-              <div className="service-subitem">
-                <img src="/services-icons/secure-archt-review.png" alt="Secure Architecture Reviews" className="subservice-icon" />
-                <span>Secure Architecture Reviews</span>
-              </div>
-              <div className="service-subitem">
-                <img src="/services-icons/security-hardning.png" alt="Security Hardening" className="subservice-icon" />
-                <span>Security Hardening</span>
-              </div>
-              <div className="service-subitem">
-                <img src="/services-icons/app-sec.png" alt="Application Security" className="subservice-icon" />
-                <span>Application Security</span>
-              </div>
-              <div className="service-subitem">
-                <img src="/services-icons/security-eng.png" alt="Security Engineering" className="subservice-icon" />
-                <span>Security Engineering</span>
-              </div>
-              <div className="service-subitem">
-                <img src="/services-icons/threat-analysis.png" alt="Threat & Attack Surface Analysis" className="subservice-icon" />
-                <span>Threat & Attack Surface Analysis</span>
-              </div>
-              <div className="service-subitem">
-                <img src="/services-icons/tooling-automation.png" alt="Security Tooling & Automation" className="subservice-icon" />
-                <span>Security Tooling & Automation</span>
-              </div>
-            </div>
-          </div>
+           </div>
         </div>
       </div>
     </div>
   </section>
 
+
+
+
   {/*  Methodology Section  */}
   <section className="methodology-section section-padding" id="methodology">
     <div className="wrap">
-      <div className="section-header">
+      <div className="section-header reveal-fade">
         <span className="section-tag">Engineered Approach</span>
         <h2 className="section-title">How We Work</h2>
         <p className="section-subtitle">
@@ -467,25 +406,25 @@ export default function Home() {
       </div>
 
       <div className="methodology-grid">
-        <div className="step-card">
+        <div className="step-card reveal-up reveal-delay-1">
           <div className="step-number">01</div>
           <h4 className="step-title">Discovery & Reconnaissance</h4>
           <p className="step-desc">Deep technical analysis of target architecture, dependencies, and potential attack vectors.</p>
         </div>
 
-        <div className="step-card">
+        <div className="step-card reveal-up reveal-delay-2">
           <div className="step-number">02</div>
           <h4 className="step-title">Offensive Assessment</h4>
           <p className="step-desc">Rigorous penetration testing and vulnerability research to expose security gaps before exploit.</p>
         </div>
 
-        <div className="step-card">
+        <div className="step-card reveal-up reveal-delay-3">
           <div className="step-number">03</div>
           <h4 className="step-title">Intelligent Automation</h4>
           <p className="step-desc">Deploying tailored AI agents, RAG workflows, and security tools to automate detection and response.</p>
         </div>
 
-        <div className="step-card">
+        <div className="step-card reveal-up reveal-delay-4">
           <div className="step-number">04</div>
           <h4 className="step-title">System Hardening</h4>
           <p className="step-desc">Implementing architectural fixes, configuration hardening, and long-term security resilience.</p>
@@ -498,7 +437,7 @@ export default function Home() {
   <section className="contact-section section-padding" id="contact">
     <div className="wrap">
       <div className="contact-wrapper">
-        <div className="contact-left">
+        <div className="contact-left reveal-3d">
           <span className="section-tag">Start a Conversation</span>
           <h2>Let's work on something that matters.</h2>
           <p className="contact-lead">
@@ -546,11 +485,11 @@ export default function Home() {
         </div>
 
         {/*  Interactive Contact Form  */}
-        <div className="contact-form-card">
+        <div className="contact-form-card reveal-up reveal-delay-2">
           <h3 className="form-title">Send a Direct Message</h3>
           <p className="form-sub">Fill out your project details and our team will get back to you promptly.</p>
 
-          <form id="contactForm" onSubmit={(e) => e.preventDefault()}>
+          <form id="contactForm" onSubmit={handleContactSubmit}>
             <div className="form-group">
               <label className="form-label" htmlFor="contactName">Your Name / Organization</label>
               <input className="form-input" type="text" id="contactName" placeholder="e.g. Alex Vance / Enterprise Tech" required />
@@ -589,6 +528,7 @@ export default function Home() {
 </main>
 
 {/*  Interactive Modal  */}
+<InquiryModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
 
 
 {/*  Site Footer  */}

@@ -3,18 +3,37 @@ import React from "react";
 export default function InquiryModal({ isOpen, onClose }) {
   if (!isOpen) return null;
   
-  const handleModalSubmit = (e) => {
+  const handleModalSubmit = async (e) => {
     e.preventDefault();
+    const name = document.getElementById('modalName').value;
     const email = document.getElementById('modalEmail').value;
     const message = document.getElementById('modalMessage').value;
+    const btn = e.target.querySelector('button[type="submit"] span');
+    const originalText = btn.innerText;
 
-    const mailto = `mailto:info@blackroot.com.np?subject=${encodeURIComponent('New Project Inquiry')}&body=${encodeURIComponent(message + '\n\nContact: ' + email)}`;
-    window.location.href = mailto;
-    onClose();
+    btn.innerText = "Sending...";
+    try {
+      await fetch(import.meta.env.VITE_FORMSPREE_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify({ name, email, message })
+      });
+      btn.innerText = "Sent Successfully!";
+      setTimeout(() => {
+        btn.innerText = originalText;
+        onClose();
+      }, 1500);
+    } catch (err) {
+      btn.innerText = "Error Sending!";
+      setTimeout(() => btn.innerText = originalText, 3000);
+    }
   };
 
   return (
-<div className="modal-backdrop" id="inquiryModal">
+<div className="modal-backdrop active" id="inquiryModal">
   <div className="modal-box">
     <button className="modal-close" onClick={onClose} aria-label="Close modal">
       <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
@@ -28,6 +47,10 @@ export default function InquiryModal({ isOpen, onClose }) {
     </div>
 
     <form id="modalForm" onSubmit={handleModalSubmit}>
+      <div className="form-group">
+        <label className="form-label" htmlFor="modalName">Your Name</label>
+        <input className="form-input" type="text" id="modalName" placeholder="Alex Vance" required />
+      </div>
       <div className="form-group">
         <label className="form-label" htmlFor="modalEmail">Your Email</label>
         <input className="form-input" type="email" id="modalEmail" placeholder="your@email.com" required />

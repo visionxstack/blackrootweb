@@ -6,6 +6,7 @@ import ScrollToHash from './components/ScrollToHash';
 import Home from './pages/Home';
 import About from './pages/About';
 import Services from './pages/Services';
+import AgenticAISecurity from './pages/AgenticAISecurity';
 
 import SocialSidebar from './components/SocialSidebar';
 
@@ -22,7 +23,7 @@ function ScrollObserver() {
         });
       }, { threshold: 0.1 });
 
-      const elements = document.querySelectorAll('.reveal-up');
+      const elements = document.querySelectorAll('.reveal-up, .animate-on-scroll, .reveal-3d, .reveal-fade');
       elements.forEach(el => observer.observe(el));
 
       return () => observer.disconnect();
@@ -55,6 +56,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/about" element={<About />} />
             <Route path="/services" element={<Services />} />
+            <Route path="/agentic-ai" element={<AgenticAISecurity />} />
           </Route>
         </Routes>
       </Router>
