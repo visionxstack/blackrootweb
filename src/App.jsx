@@ -46,10 +46,12 @@ function MainLayout() {
 
 import { HelmetProvider } from 'react-helmet-async';
 
+const routerBasename = import.meta.env.BASE_URL === './' ? '/' : import.meta.env.BASE_URL;
+
 function App() {
   return (
     <HelmetProvider>
-      <Router>
+      <Router basename={routerBasename}>
         <ScrollObserver />
         <ScrollToHash />
         <Routes>
