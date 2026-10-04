@@ -7,6 +7,7 @@ import Home from './pages/Home';
 import About from './pages/About';
 import Services from './pages/Services';
 import AgenticAISecurity from './pages/AgenticAISecurity';
+import NotFound from './pages/NotFound';
 
 import SocialSidebar from './components/SocialSidebar';
 
@@ -57,6 +58,7 @@ function App() {
             <Route path="/about" element={<About />} />
             <Route path="/services" element={<Services />} />
             <Route path="/agentic-ai" element={<AgenticAISecurity />} />
+            <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>
       </Router>
