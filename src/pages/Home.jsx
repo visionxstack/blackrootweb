@@ -126,8 +126,8 @@ export default function Home() {
           "@context": "https://schema.org",
           "@type": "Organization",
           "name": "BlackRoot Technologies",
-          "url": "https://blackroot.com.np",
-          "logo": "https://blackroot.com.np/logo/blackroot-logo.png",
+          "url": "https://www.blackroot.com.np",
+          "logo": "https://www.blackroot.com.np/logo/blackroot-logo.png",
           "description": "BlackRoot Technologies is a security engineering and research company focused on vulnerability research, intelligent security systems, and offensive security engineering."
         }}
       />
